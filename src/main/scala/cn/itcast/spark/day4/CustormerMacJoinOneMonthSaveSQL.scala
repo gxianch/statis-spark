@@ -65,13 +65,12 @@ object CustormerMacJoinOneMonthSaveSQL {
     import redis.clients.jedis.Jedis
     val jedis = new Jedis("111.23.6.233",23308)
     val Value = "{\"total\":"+totalHotelNum+
-      ",\"0\":" +zero+
-      ",\"0-3\":"+threeNum +
-      ",\"3-6\":"+sixNum +
-      ",\"6-1\":"+highsixNum +
+      ",\"zero\":" +zero+
+      ",\"three\":"+threeNum +
+      ",\"six\":"+sixNum +
+      ",\"one\":"+highsixNum +
       "}"
-    val key = "powerOnRate:hotel:"+yearmonth
-    jedis.set(key,Value)
+    jedis.hset("powerOnRate:hotel",yearmonth,Value)
     jedis.close()
     /*
     |  customerId|macNum|totalDay|          hotelrate|

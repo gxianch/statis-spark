@@ -44,16 +44,15 @@ object MacCountOneMonthReadSQL {
     out.println("盒子开机率为0.3<=x<0.6的盒子数量: "+sixNum+" 百分比: "+sixNum.toFloat/macTotalNum.toFloat*100+"%")
     out.println("盒子开机率为>0.6的盒子数量: "+highsixNum+" 百分比: "+highsixNum.toFloat/macTotalNum.toFloat*100+"%")
     out.close()
-
+    val mac201811 = "{\"total\":267857,\"zero\":84566,\"three\":70471,\"six\":45811,\"one\":67009}"
     val jedis = new Jedis("111.23.6.233",23308)
     val Value = "{\"total\":"+macTotalNum+
-      ",\"0\":" +(macTotalNum-openNum)+
-      ",\"0-3\":"+threeNum +
-      ",\"3-6\":"+sixNum +
-      ",\"6-1\":"+highsixNum +
+      ",\"zero\":" +(macTotalNum-openNum)+
+      ",\"three\":"+threeNum +
+      ",\"six\":"+sixNum +
+      ",\"one\":"+highsixNum +
       "}"
-    val key = "powerOnRate:mac:"+month
-    jedis.set(key,Value)
+    jedis.hset("powerOnRate:mac",month,Value)
     jedis.close()
 
     sc.stop()
