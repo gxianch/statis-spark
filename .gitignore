@@ -1,0 +1,10 @@
+/target/
+/data/
+/.idea/
+.settings/
+*.settings
+*.classpath
+*.project
+*.properties
+*.iml
+src/main/resources/
